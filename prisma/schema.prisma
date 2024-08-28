@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model prof {
+  id            Int        @id @default(autoincrement())
+  user          String     @unique
+  password      String     @unique @db.VarChar(255)
+  code          String     @unique
+  add_cour      Int        @default(0)
+  admin         String
+}
+
+model cour {
+  id     Int     @id @default(autoincrement())
+  user   String
+  titre  String  @unique
+  niveau String
+  video  String?
+  image  Bytes?
+}
+
+//jam3iya
+model admin {
+  id              Int          @id @default(autoincrement())
+  user            String       @db.VarChar(50)
+  phone            Int
+  password        String       @unique@db.VarChar(100)
+  willaya         String
+  image           Bytes?
+
+  add_etudiant     DateTime     @default(now())
+  delete_etudiant  DateTime     @updatedAt
+ 
+  add_prof         Int          @default(0)
+  delete_prof      Int          @default(0)
+ 
+}
+
+model etudiant {
+  id             Int       @id @default(autoincrement())
+  user           String    @db.Text 
+  email          String    @db.VarChar(50)  
+  phone          Int   
+  password       String    @unique
+  niveau         String
+  admin         String
+  add_etudiant     DateTime     @default(now())
+  delete_etudiant  DateTime      @updatedAt
+  expiration_date  DateTime
+}
+
+
+model etudiant_admin {
+  id             Int       @id @default(autoincrement())
+  user           String    @db.Text 
+  email          String    @db.VarChar(50)  
+  phone          Int   
+  password       String    @unique
+  niveau         String
+  admin          String
+  add_etudiant     DateTime     @default(now())
+  delete_etudiant  DateTime      @updatedAt
+  expiration_date    DateTime
+}
+
+
+model delete_etudiant{
+  id             Int       @id @default(autoincrement())
+  user           String    @db.Text 
+  email          String    @db.VarChar(50)  
+  phone          Int   
+  password       String    @unique
+  niveau         String
+  admin          String
+  add_etudiant     DateTime     @default(now())
+  delete_etudiant  DateTime      @updatedAt
+
+}
+
+model contact {    
+  id          Int      @id @default(autoincrement())
+  user        String   @db.VarChar(20)
+  email       String   @db.VarChar(50)
+  Message     String   @db.VarChar(100)
+  Details     String?  @db.VarChar(255)
+}

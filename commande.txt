@@ -1,0 +1,15 @@
+pour instalation de prisma :
+----------------------------
+
+-npm istall 
+-npm i prisma --D 
+-npx prisma init 
+-npx prisma migrate dev --name membres
+-npm install @prisma/client
+-yarn add @prisma/client
+
+
+-npm install multer
+************************************************
+ Yarn est un gestionnaire de paquets alternatif à npm,
+  qui est souvent utilisé pour gérer les dépendances dans les projets JavaScript.
